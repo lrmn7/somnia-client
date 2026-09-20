@@ -26,7 +26,7 @@ jobs:
 
           echo "Cloning Wiki from current repository..."
           if ! git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki; then
-            echo "::error::Tab Wiki di repo ini belum diaktifkan! Buka https://github.com/${{ github.repository }}/wiki dan klik tombol hijau 'Create the first page' sekali saja."
+            echo "::error::GitHub Wiki is not initialized! Please open https://github.com/${{ github.repository }}/wiki and click 'Create the first page' once to initialize the wiki repository."
             exit 1
           fi
 
