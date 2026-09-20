@@ -39,4 +39,4 @@ jobs:
           # Scope package name to @owner/somnia-client for GitHub Packages compatibility
           npm pkg set name="@${{ github.repository_owner }}/somnia-client"
           npm pkg set publishConfig.registry="https://npm.pkg.github.com"
-          npm publish
+          npm publish || echo "Package version already published to GitHub Packages, skipping."
