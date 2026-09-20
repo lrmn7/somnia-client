@@ -6,6 +6,7 @@ on:
     paths:
       - "docs/**"
       - "README.md"
+      - "scripts/sync-wiki.js"
       - ".github/workflows/wiki-sync.yml"
   workflow_dispatch:
 
@@ -19,79 +20,12 @@ jobs:
       - name: Checkout Source Repository
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
       - name: Sync Documentation to Wiki
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-          echo "Cloning GitHub Wiki repository..."
-          if ! git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki; then
-            echo "::error::GitHub Wiki repository not initialized! Go to https://github.com/${{ github.repository }}/wiki and click 'Create the first page'."
-            exit 1
-          fi
-
-          echo "Preparing documentation pages..."
-          cp docs/getting-started.md wiki/Getting-Started.md
-          cp docs/architecture.md wiki/Architecture.md
-          cp docs/configuration.md wiki/Configuration.md
-          cp docs/network.md wiki/Network.md
-          cp docs/security.md wiki/Security.md
-          cp docs/compatibility.md wiki/Compatibility.md
-          cp docs/limitations.md wiki/Limitations.md
-          cp docs/feature-support.md wiki/Feature-Support.md
-
-          # Convert README to Home.md with Wiki-compatible links
-          cp README.md wiki/Home.md
-          sed -i 's|\./docs/getting-started\.md|Getting-Started|g' wiki/Home.md
-          sed -i 's|\./docs/architecture\.md|Architecture|g' wiki/Home.md
-          sed -i 's|\./docs/configuration\.md|Configuration|g' wiki/Home.md
-          sed -i 's|\./docs/network\.md|Network|g' wiki/Home.md
-          sed -i 's|\./docs/security\.md|Security|g' wiki/Home.md
-          sed -i 's|\./docs/compatibility\.md|Compatibility|g' wiki/Home.md
-          sed -i 's|\./docs/limitations\.md|Limitations|g' wiki/Home.md
-          sed -i 's|\./docs/feature-support\.md|Feature-Support|g' wiki/Home.md
-          sed -i 's|\./LICENSE|https://github.com/${{ github.repository }}/blob/main/LICENSE|g' wiki/Home.md
-          sed -i 's|\./\.env\.example|https://github.com/${{ github.repository }}/blob/main/.env.example|g' wiki/Home.md
-
-          echo "Generating _Sidebar.md..."
-          cat << 'EOF' > wiki/_Sidebar.md
-### [somnia-client](Home)
-
-**Getting Started**
-* [Home](Home)
-* [Quick Start](Getting-Started)
-* [Client Configuration](Configuration)
-
-**Core & Network**
-* [Network & Chains](Network)
-* [Architecture & Patterns](Architecture)
-* [Feature Support Matrix](Feature-Support)
-
-**Reliability & Security**
-* [Security Best Practices](Security)
-* [Limitations & Boundaries](Limitations)
-* [Compatibility Matrix](Compatibility)
-
----
-**Links**
-* [GitHub Repository](https://github.com/lrmn7/somnia-client)
-* [Issue Tracker](https://github.com/lrmn7/somnia-client/issues)
-* [npm Package](https://www.npmjs.com/package/somnia-client)
-EOF
-
-          echo "Generating _Footer.md..."
-          cat << 'EOF' > wiki/_Footer.md
----
-*somnia-client — Discord-first client and abstraction layer for Somnia blockchain development.*  
-[GitHub Repository](https://github.com/lrmn7/somnia-client) · [MIT License](https://github.com/lrmn7/somnia-client/blob/main/LICENSE)
-EOF
-
-          cd wiki
-          git add .
-          if git diff --staged --quiet; then
-            echo "No documentation changes detected. Wiki is already up-to-date."
-          else
-            git commit -m "docs: auto-sync documentation from repository"
-            git push origin HEAD
-            echo "Wiki successfully synchronized!"
-          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/sync-wiki.js
