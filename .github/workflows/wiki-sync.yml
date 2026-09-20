@@ -41,27 +41,29 @@ jobs:
           sed -i 's|\./\.env\.example|https://github.com/${{ github.repository }}/blob/main/.env.example|g' wiki/Home.md
 
           echo "Generating Wiki Sidebar..."
-          printf '### [somnia-client](Home)\n\n' > wiki/_Sidebar.md
-          printf '**Documentation**\n' >> wiki/_Sidebar.md
-          printf '* [Home](Home)\n' >> wiki/_Sidebar.md
-          printf '* [Quick Start](getting-started)\n' >> wiki/_Sidebar.md
-          printf '* [Architecture](architecture)\n' >> wiki/_Sidebar.md
-          printf '* [Configuration](configuration)\n' >> wiki/_Sidebar.md
-          printf '* [Network & Chains](network)\n' >> wiki/_Sidebar.md
-          printf '* [Security Best Practices](security)\n' >> wiki/_Sidebar.md
-          printf '* [Compatibility Matrix](compatibility)\n' >> wiki/_Sidebar.md
-          printf '* [Limitations & Boundaries](limitations)\n' >> wiki/_Sidebar.md
-          printf '* [Feature Support Matrix](feature-support)\n\n' >> wiki/_Sidebar.md
-          printf '---\n' >> wiki/_Sidebar.md
-          printf '**Links**\n' >> wiki/_Sidebar.md
-          printf '* [GitHub Repository](https://github.com/${{ github.repository }})\n' >> wiki/_Sidebar.md
-          printf '* [Issue Tracker](https://github.com/${{ github.repository }}/issues)\n' >> wiki/_Sidebar.md
-          printf '* [npm Package](https://www.npmjs.com/package/somnia-client)\n' >> wiki/_Sidebar.md
+          echo "### [somnia-client](Home)" > wiki/_Sidebar.md
+          echo "" >> wiki/_Sidebar.md
+          echo "**Documentation**" >> wiki/_Sidebar.md
+          echo "* [Home](Home)" >> wiki/_Sidebar.md
+          echo "* [Quick Start](getting-started)" >> wiki/_Sidebar.md
+          echo "* [Architecture](architecture)" >> wiki/_Sidebar.md
+          echo "* [Configuration](configuration)" >> wiki/_Sidebar.md
+          echo "* [Network & Chains](network)" >> wiki/_Sidebar.md
+          echo "* [Security Best Practices](security)" >> wiki/_Sidebar.md
+          echo "* [Compatibility Matrix](compatibility)" >> wiki/_Sidebar.md
+          echo "* [Limitations & Boundaries](limitations)" >> wiki/_Sidebar.md
+          echo "* [Feature Support Matrix](feature-support)" >> wiki/_Sidebar.md
+          echo "" >> wiki/_Sidebar.md
+          echo "---" >> wiki/_Sidebar.md
+          echo "**Links**" >> wiki/_Sidebar.md
+          echo "* [GitHub Repository](https://github.com/${{ github.repository }})" >> wiki/_Sidebar.md
+          echo "* [Issue Tracker](https://github.com/${{ github.repository }}/issues)" >> wiki/_Sidebar.md
+          echo "* [npm Package](https://www.npmjs.com/package/somnia-client)" >> wiki/_Sidebar.md
 
           echo "Generating Wiki Footer..."
-          printf '---\n' > wiki/_Footer.md
-          printf '*somnia-client — Discord-first client and abstraction layer for Somnia blockchain development.*\n' >> wiki/_Footer.md
-          printf '[GitHub Repository](https://github.com/${{ github.repository }}) · [MIT License](https://github.com/${{ github.repository }}/blob/main/LICENSE)\n' >> wiki/_Footer.md
+          echo "---" > wiki/_Footer.md
+          echo "*somnia-client — Discord-first client and abstraction layer for Somnia blockchain development.*" >> wiki/_Footer.md
+          echo "[GitHub Repository](https://github.com/${{ github.repository }}) · [MIT License](https://github.com/${{ github.repository }}/blob/main/LICENSE)" >> wiki/_Footer.md
 
           cd wiki
           git add -A
