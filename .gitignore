@@ -1,0 +1,79 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Internal development notes & planning (local only, excluded from git & npm)
+/internal/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+!.env.test.example
+!.env.development.example
+!.env.production.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test & coverage artifacts
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+blob-report/
+
+# TypeScript & build caches
+*.tsbuildinfo
+.turbo/
+.cache/
+.parcel-cache/
+
+# Generated build output
+dist/
+build/
+lib/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.old
+*.orig
+*.patch
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE files
+.vscode/*
+!.vscode/settings.example.json
+.idea/
+*.swp
+*.swo
+
+# Local tooling & credentials
+*.local
+*.pid
+*.pid.lock
+*.pem
+*.key
+*.crt
+certs/
+*.sqlite
+*.sqlite3
+*.db
+reports/

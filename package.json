@@ -1,0 +1,76 @@
+{
+  "name": "somnia-client",
+  "version": "0.1.0",
+  "description": "Discord-first client and abstraction layer for Somnia blockchain development",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./discord": {
+      "import": "./dist/discord/index.js",
+      "types": "./dist/discord/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src/ tests/",
+    "lint:fix": "biome check --write src/ tests/",
+    "format": "biome format --write src/ tests/",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "somnia",
+    "blockchain",
+    "discord",
+    "web3",
+    "viem",
+    "evm",
+    "reactivity",
+    "bot"
+  ],
+  "author": "L RMN",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lrmn7/somnia-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lrmn7/somnia-client/issues"
+  },
+  "homepage": "https://github.com/lrmn7/somnia-client#readme",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "viem": "^2.21.0"
+  },
+  "peerDependencies": {
+    "discord.js": "^14.16.0"
+  },
+  "peerDependenciesMeta": {
+    "discord.js": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "discord.js": "^14.16.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
